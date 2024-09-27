@@ -1,0 +1,959 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Body {
+  id: Int!
+  preview: String!
+  title: String!
+}
+
+type CityEntity {
+  events: [EventEntity!]
+  id: Int!
+
+  """Широта"""
+  latitude: String!
+
+  """Долгота"""
+  longitude: String!
+
+  """Название города"""
+  name: String!
+  places: [PlaceEntity!]
+
+  """Регион"""
+  region: String!
+
+  """Временная зона"""
+  time_zons: String!
+
+  """Часовой пояс"""
+  utc: Float!
+}
+
+type CommentEntity {
+  comment: String!
+  event: EventEntity!
+  eventId: Int
+  id: Int!
+  place: PlaceEntity!
+  placeId: Int
+  short: ShortEntity!
+  shortId: Int
+  user: UserEntity!
+  userId: Int!
+}
+
+type CostOptionEntity {
+  cost: [EventPlaceCostOptionEntity!]!
+  id: ID!
+  name: String!
+}
+
+type CostOptionType {
+  name: String!
+  price: Float!
+}
+
+type CountResponse {
+  count: Float!
+}
+
+input CreateCommentInput {
+  comment: String!
+  eventId: Int!
+  placeId: Int!
+  shortId: Int!
+  userId: Int!
+}
+
+input CreateCostOptionInput {
+  name: String!
+}
+
+input CreateEventInput {
+  desc: String!
+  direction: EventDirections!
+  existTimeEnd: DateTime
+  existTimeStart: DateTime
+  preview: String!
+  publish: Boolean = true
+  recommendation: Boolean = false
+  title: String!
+  userId: Int!
+  whenStartToShow: DateTime
+}
+
+input CreateEventPlaceCostOptionInput {
+  costOptionId: Int!
+  eventId: Int
+  placeId: Int
+  price: String! = "бесплатно"
+}
+
+input CreateEventPlaceTagInput {
+  eventId: Int
+  placeId: Int
+  tagsId: Int!
+}
+
+input CreateImageInput {
+  eventId: Int
+  path: String!
+  placeId: Int
+}
+
+input CreateInfoInput {
+  adress: String
+  call_back: Boolean = false
+  eventId: Int
+  latitude: String
+  longitude: String
+  metro: String
+  phone: String
+  placeId: Int
+  site: String
+  social: String
+  time_from: String
+  time_to: String
+}
+
+input CreatePlaceInput {
+  desc: String!
+  direction: PlaceDirections!
+  existTimeEnd: DateTime
+  existTimeStart: DateTime
+  preview: String!
+  publish: Boolean = true
+  title: String!
+  userId: Int!
+}
+
+input CreateRatingInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input CreateRoleInput {
+  name: Roles!
+}
+
+input CreateShortInput {
+  eventId: Int
+  path: String!
+  placeId: Int
+  title: String!
+  userId: Int!
+}
+
+input CreateShortRatingInput {
+  dislike: Int!
+  like: Int!
+  shortId: Int!
+}
+
+input CreateStatisticInput {
+  currentDay: DateTime!
+  day: String!
+  eventId: Int!
+  userId: Int!
+  views: Int!
+}
+
+input CreateTagInput {
+  name: String!
+}
+
+input CreateTokenInput {
+  expire: DateTime!
+  refresh_token: String!
+  userId: Int!
+}
+
+input CreateUserInput {
+  avatar: String
+  email: String!
+  name: String!
+  password: String!
+  phone: String
+  roleId: Int
+}
+
+input CreateVisitorInput {
+  date: DateTime!
+  eventId: Int!
+  userId: Int!
+}
+
+input CreateWidgetBodyInput {
+  eventId: Int
+  placeId: Int
+  widgetId: Int!
+}
+
+input CreateWidgetInput {
+  active: Boolean! = true
+  sort: Int!
+  title: String
+  type: Widgets!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+"""Направления для событий"""
+enum EventDirections {
+  """образование"""
+  Education
+
+  """выставки"""
+  Exhibitions
+
+  """фестивали"""
+  Festivals
+
+  """праздники"""
+  Holidays
+
+  """с детьми"""
+  Kids
+
+  """активный отдых"""
+  Leisure
+
+  """кино"""
+  Movie
+
+  """музыка"""
+  Music
+
+  """шоу"""
+  Show
+}
+
+type EventEntity {
+  body: [WidgetBodyEntity!]
+  categry: String!
+  city: CityEntity!
+  cityId: Int!
+  comments: [CommentEntity!]
+  costOption: [EventPlaceCostOptionEntity!]!
+  created_at: DateTime!
+  desc: String!
+  direction: EventDirections!
+  dislike: Int
+  existTimeEnd: DateTime
+  existTimeStart: DateTime
+  id: ID!
+  images: [ImageEntity!]!
+  info: InfoEntity!
+  like: Int
+  place: PlaceEntity
+  placeId: Int
+  preview: String
+  publish: Boolean!
+  rating: [RatingEntity!]
+  recommendation: Boolean!
+  shorts: [ShortEntity!]
+  tags: [EventPlaceTagEntity!]!
+  title: String!
+  updated_at: DateTime!
+  user: UserEntity!
+  userId: Int!
+  views: Int
+  visitors: [VisitorEntity!]
+  whenStartToShow: DateTime
+}
+
+type EventPlaceCostOptionEntity {
+  costOption: CostOptionEntity!
+  costOptionId: Int!
+  event: EventEntity!
+  eventId: Int!
+  id: ID!
+  place: PlaceEntity!
+  placeId: Int!
+  price: String!
+}
+
+type EventPlaceTagEntity {
+  event: EventEntity!
+  eventId: Int
+  id: ID!
+  place: PlaceEntity!
+  placeId: Int
+  tags: TagEntity!
+  tagsId: Int!
+}
+
+type EventResponse {
+  categry: String!
+  cityId: Int!
+  costOptions: [CostOptionType!]!
+  desc: String!
+  direction: String!
+  dislike: Int
+  existTimeEnd: DateTime
+  existTimeStart: DateTime
+  id: ID!
+  images: [String!]!
+  info: InfoType!
+  like: Int
+  place: String
+  preview: String
+  publish: Boolean!
+  rating: Int
+  recommendation: Boolean!
+  tags: [TagType!]!
+  title: String!
+  userId: Int!
+  views: Int
+  visitors: [String!]
+  visitorsCount: Int
+  whenStartToShow: DateTime
+}
+
+"""получить все события"""
+type EventsResponse {
+  adress: String!
+  categry: String!
+  cityId: Int!
+  desc: String!
+  direction: String!
+  dislike: Int
+  existTimeEnd: DateTime
+  existTimeStart: DateTime
+  id: ID!
+  like: Int
+  place: String
+  preview: String
+  publish: Boolean!
+  recommendation: Boolean!
+  title: String!
+  userId: Int!
+  views: Int
+  visitors: [String!]
+  visitorsCount: Int
+  whenStartToShow: DateTime
+}
+
+type ImageEntity {
+  event: EventEntity!
+  eventId: Int
+  id: ID!
+  path: String!
+  place: PlaceEntity!
+  placeId: Int
+}
+
+type InfoEntity {
+  adress: String
+  call_back: Boolean
+  event: EventEntity!
+  eventId: Int
+  id: ID!
+  latitude: String
+  longitude: String
+  metro: String
+  phone: String
+  place: PlaceEntity!
+  placeId: Int
+  site: String
+  social: String
+  time_from: String
+  time_to: String
+}
+
+type InfoType {
+  adress: String
+  call_back: Boolean
+  eventId: Int
+  id: ID!
+  latitude: String
+  longitude: String
+  metro: String
+  phone: String
+  placeId: Int
+  site: String
+  social: String
+  time_from: String
+  time_to: String
+}
+
+type Mutation {
+  createComment(createCommentInput: CreateCommentInput!): CommentEntity!
+  createCostOption(createCostOptionInput: CreateCostOptionInput!): CostOptionEntity!
+  createEvent(createEventInput: CreateEventInput!): EventEntity!
+  createEventPlaceCostOption(createEventPlaceCostOptionInput: CreateEventPlaceCostOptionInput!): EventPlaceCostOptionEntity!
+  createEventPlaceTag(createEventPlaceTagInput: CreateEventPlaceTagInput!): EventPlaceTagEntity!
+  createImage(createImageInput: CreateImageInput!): ImageEntity!
+  createInfo(createInfoInput: CreateInfoInput!): InfoEntity!
+  createPlace(createPlaceInput: CreatePlaceInput!): PlaceEntity!
+  createRating(createRatingInput: CreateRatingInput!): RatingEntity!
+  createRole(createRoleInput: CreateRoleInput!): RoleEntity!
+  createShort(createShortInput: CreateShortInput!): ShortEntity!
+  createShortRating(createShortRatingInput: CreateShortRatingInput!): ShortRatingEntity!
+  createStatistic(createStatisticInput: CreateStatisticInput!): StatisticEntity!
+  createTag(createTagInput: CreateTagInput!): TagEntity!
+  createToken(createTokenInput: CreateTokenInput!): TokenEntity!
+  createVisitor(createVisitorInput: CreateVisitorInput!): VisitorEntity!
+  createWidget(createWidgetInput: CreateWidgetInput!): WidgetEntity!
+  createWidgetBody(createWidgetBodyInput: CreateWidgetBodyInput!): WidgetBodyEntity!
+  publishEvent(id: Int!): EventEntity!
+  publishPlace(id: Int!): PlaceEntity!
+  registrationMeneger(registrationUserInput: CreateUserInput!): Token!
+  registrationUser(registrationUserInput: CreateUserInput!): Token!
+  removeCostOption(id: Int!): CostOptionEntity!
+  removeEvent(id: Int!): RemoveResponse!
+  removeEventPlaceCostOption(id: Int!): EventPlaceCostOptionEntity!
+  removeEventPlaceTag(id: Int!): EventPlaceTagEntity!
+  removeImage(id: Int!): RemoveResponse!
+  removeInfo(id: Int!): RemoveResponse!
+  removePlace(id: Int!): RemoveResponse!
+  removeRating(id: Int!): RatingEntity!
+  removeRole(id: Int!): RoleEntity!
+  removeShort(id: Int!): ShortEntity!
+  removeShortRating(id: Int!): ShortRatingEntity!
+  removeTag(id: Int!): RemoveResponse!
+  removeUser(id: Int!): UserEntity!
+  removeVisitor(id: Int!): VisitorEntity!
+  removeWidget(id: Int!): RemoveResponse!
+  signIn(signinUserInput: SignInInput!): Token!
+  updateCostOption(updateCostOptionInput: UpdateCostOptionInput!): CostOptionEntity!
+  updateEvent(updateEventInput: UpdateEventInput!): EventEntity!
+  updateEventPlaceCostOption(updateEventPlaceCostOptionInput: UpdateEventPlaceCostOptionInput!): EventPlaceCostOptionEntity!
+  updateEventPlaceTag(updateEventPlaceTagInput: UpdateEventPlaceTagInput!): EventPlaceTagEntity!
+  updateEventViews(id: Int!): EventEntity!
+  updateImage(updateImageInput: UpdateImageInput!): ImageEntity!
+  updateInfo(updateInfoInput: UpdateInfoInput!): InfoEntity!
+  updatePlace(updatePlaceInput: UpdatePlaceInput!): PlaceEntity!
+  updatePlaceViews(id: Int!): PlaceEntity!
+  updateRating(updateRatingInput: UpdateRatingInput!): RatingEntity!
+  updateRole(updateRoleInput: UpdateRoleInput!): RoleEntity!
+  updateShort(updateShortInput: UpdateShortInput!): ShortEntity!
+  updateShortRating(updateShortRatingInput: UpdateShortRatingInput!): ShortRatingEntity!
+  updateTag(updateTagInput: UpdateTagInput!): TagEntity!
+  updateUser(updateUserInput: UpdateUserInput!): UserEntity!
+  updateWidget(updateWidgetInput: UpdateWidgetInput!): WidgetEntity!
+  updateWidgetBody(updateWidgetBodyInput: UpdateWidgetBodyInput!): WidgetBodyEntity!
+}
+
+"""Варианты выбора периодичности"""
+enum Periods {
+  """сегодня"""
+  CurrentDay
+
+  """этот месяц"""
+  Month
+
+  """завтра"""
+  NextDay
+
+  """эта неделя"""
+  Week
+
+  """эти выходные"""
+  Weekend
+}
+
+"""Направления для мест"""
+enum PlaceDirections {
+  """музеи"""
+  Museums
+
+  """прочее"""
+  Other
+
+  """парки"""
+  Parks
+
+  """рестораны"""
+  Restaurants
+
+  """клубы"""
+  Show
+
+  """пространства"""
+  Space
+
+  """театры"""
+  Theaters
+
+  """туризм"""
+  Tourism
+
+  """прогулки"""
+  Walk
+}
+
+type PlaceEntity {
+  body: [WidgetBodyEntity!]
+  categry: String!
+  city: CityEntity!
+  cityId: Int!
+  comments: [CommentEntity!]
+  costOption: [EventPlaceCostOptionEntity!]!
+  created_at: DateTime!
+  desc: String!
+  direction: PlaceDirections!
+  dislike: Int
+  events: [EventEntity!]
+  existTimeEnd: DateTime
+  existTimeStart: DateTime
+  id: ID!
+  images: [ImageEntity!]!
+  info: InfoEntity!
+  like: Int
+  preview: String
+  publish: Boolean!
+  rating: [RatingEntity!]
+  shorts: [ShortEntity!]
+  tags: [EventPlaceTagEntity!]!
+  title: String!
+  updated_at: DateTime!
+  user: UserEntity!
+  userId: Int!
+  views: Int
+  whenStartToShow: DateTime
+}
+
+type PlaceResponse {
+  categry: String!
+  cityId: Int!
+  costOptions: [CostOptionType!]!
+  desc: String!
+  direction: String!
+  dislike: Int
+  existTimeEnd: DateTime
+  existTimeStart: DateTime
+  id: ID!
+  images: [String!]!
+  info: InfoType!
+  like: Int
+  preview: String
+  publish: Boolean!
+  tags: [TagType!]!
+  title: String!
+  userId: Int!
+  views: Int
+  whenStartToShow: DateTime
+}
+
+type Query {
+  allInfo: [InfoEntity!]!
+  cities(params: RequestCities): [CityEntity!]!
+  city(id: Int!): CityEntity!
+  cityEventsAndPlaces(id: Int!): [CityEntity!]!
+  comment(id: Int!): CommentEntity!
+  comments: [CommentEntity!]!
+  event(id: Int!): EventResponse!
+  eventDashboard(id: Int!): EventEntity!
+  eventPlaceCostOption(id: Int!): EventPlaceCostOptionEntity!
+  eventPlaceCostOptions: [EventPlaceCostOptionEntity!]!
+  eventPlaceTag(id: Int!): EventPlaceTagEntity!
+  eventPlaceTags: [EventPlaceTagEntity!]!
+  events(params: RequestEvent): [EventsResponse!]!
+  eventsDashboard(params: RequestDashboard): [EventEntity!]!
+  getEventsCount: CountResponse!
+  getPlacesCount: CountResponse!
+  getUsersCount: CountResponse!
+  image(id: Int!): ImageEntity!
+  images: [ImageEntity!]!
+  info(id: Int!): InfoEntity!
+  place(id: Int!): PlaceResponse!
+  placeDashboard(id: Int!): PlaceEntity!
+  places(params: RequestPlace): [PlaceEntity!]!
+  placesDashboard(params: RequestDashboard): [PlaceEntity!]!
+  rating(id: Int!): RatingEntity!
+  refreshToken: RefreshTokenResponse!
+  role(id: Int!): RoleEntity!
+  short(id: Int!): ShortEntity!
+  shortRating(id: Int!): ShortRatingEntity!
+  statistic(id: Int!): StatisticEntity!
+  tag(id: Int!): TagEntity!
+  tags(params: RequestTags): [TagEntity!]!
+  user(id: Int!): UserEntity!
+  userEvents(id: Int!): [EventEntity!]!
+  userPlaces(id: Int!): [PlaceEntity!]!
+  users: [UserEntity!]!
+  widget(id: Int!): WidgetResponse!
+  widgets: [WidgetResponse!]!
+}
+
+type RatingEntity {
+  event: EventEntity
+  eventId: Int
+  id: Int!
+  place: PlaceEntity
+  placeId: Int
+  stars: Float!
+  user: UserEntity
+  userId: Int
+}
+
+type RefreshTokenResponse {
+  token: String!
+}
+
+type RemoveResponse {
+  id: Int
+  message: String!
+  status: String!
+}
+
+input RequestCities {
+  skip: Int
+  take: Int
+}
+
+input RequestDashboard {
+  date: DateTime
+  skip: Int
+  take: Int
+  title: String
+}
+
+input RequestEvent {
+  cityId: Float
+  desc: String
+  direction: EventDirections
+  period: Periods
+  skip: Int
+  tagId: Float
+  take: Int
+  title: String
+}
+
+input RequestPlace {
+  cityId: Float
+  desc: String
+  direction: PlaceDirections
+  period: Periods
+  skip: Int
+  tagId: Float
+  take: Int
+  title: String
+}
+
+input RequestTags {
+  name: String
+}
+
+type RoleEntity {
+  id: ID!
+  name: Roles!
+  user: [UserEntity!]!
+}
+
+"""Описание ролей"""
+enum Roles {
+  """администратор"""
+  Admin
+
+  """клиент, хозяин заведения"""
+  Client
+
+  """менеджер клиента, помошник хозяина заведения"""
+  Client_manager
+
+  """менеджер по событиям"""
+  Event_manager
+
+  """организатор событий"""
+  Event_organizer
+
+  """младший менеджер по событиям"""
+  Junior_event_manager
+
+  """младший менеджер по местам"""
+  Junior_place_manager
+
+  """управляющий"""
+  Manager
+
+  """менеджер по местам"""
+  Place_manager
+
+  """пользователь"""
+  User
+}
+
+type ShortEntity {
+  comments: [CommentEntity!]
+  event: EventEntity
+  eventId: Int
+  id: Int!
+  path: String!
+  place: PlaceEntity
+  placeId: Int
+  ratings: ShortRatingEntity!
+  title: String!
+  user: UserEntity!
+  userId: Int!
+  views: Int!
+}
+
+type ShortRatingEntity {
+  dislike: Int!
+  id: Int!
+  like: Int!
+  short: ShortEntity!
+  shortId: Int!
+}
+
+input SignInInput {
+  email: String!
+  password: String!
+}
+
+type StatisticEntity {
+  created_at: DateTime!
+  currentDay: DateTime!
+  day: String!
+  event: EventEntity!
+  eventId: Int!
+  id: Int!
+  user: UserEntity!
+  userId: Int!
+  views: Int!
+}
+
+type TagEntity {
+  id: ID!
+  name: String!
+  tags: [EventPlaceTagEntity!]!
+}
+
+type TagType {
+  id: ID!
+  name: String!
+}
+
+type Token {
+  role: String!
+  token: String!
+  userId: Int!
+}
+
+type TokenEntity {
+  expire: DateTime!
+  id: Int!
+  refresh_token: String!
+  user: UserEntity!
+  userId: Int!
+}
+
+input UpdateCostOptionInput {
+  id: ID!
+  name: String
+}
+
+input UpdateEventInput {
+  desc: String
+  direction: EventDirections
+  dislike: Int
+  existTimeEnd: DateTime
+  existTimeStart: DateTime
+  id: Int!
+  like: Int
+  preview: String
+  publish: Boolean = true
+  recommendation: Boolean = false
+  title: String
+  userId: Int
+  whenStartToShow: DateTime
+}
+
+input UpdateEventPlaceCostOptionInput {
+  costOptionId: Int
+  eventId: Int
+  id: Int!
+  placeId: Int
+  price: String = "бесплатно"
+}
+
+input UpdateEventPlaceTagInput {
+  eventId: Int
+  id: Int!
+  placeId: Int
+  tagsId: Int
+}
+
+input UpdateImageInput {
+  eventId: Int
+  id: Int!
+  path: String
+  placeId: Int
+}
+
+input UpdateInfoInput {
+  adress: String
+  call_back: Boolean = false
+  eventId: Int
+  id: Int!
+  latitude: String
+  longitude: String
+  metro: String
+  phone: String
+  placeId: Int
+  site: String
+  social: String
+  time_from: String
+  time_to: String
+}
+
+input UpdatePlaceInput {
+  desc: String
+  direction: PlaceDirections
+  dislike: Int
+  existTimeEnd: DateTime
+  existTimeStart: DateTime
+  id: Int!
+  like: Int
+  preview: String
+  publish: Boolean = true
+  title: String
+  userId: Int
+}
+
+input UpdateRatingInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input UpdateRoleInput {
+  id: Int!
+  name: Roles
+}
+
+input UpdateShortInput {
+  eventId: Int
+  id: Int!
+  path: String
+  placeId: Int
+  title: String
+  userId: Int
+}
+
+input UpdateShortRatingInput {
+  dislike: Int
+  id: Int!
+  like: Int
+  shortId: Int
+}
+
+input UpdateTagInput {
+  id: Int!
+  name: String
+}
+
+input UpdateUserInput {
+  avatar: String
+  email: String!
+  id: ID!
+  name: String!
+  password: String
+  phone: String
+  roleId: Int
+}
+
+input UpdateWidgetBodyInput {
+  eventId: Int
+  id: Int!
+  placeId: Int
+  widgetId: Int
+}
+
+input UpdateWidgetInput {
+  active: Boolean = true
+  id: Int!
+  sort: Int
+  title: String
+  type: Widgets
+}
+
+type UserEntity {
+  avatar: String
+  comments: [CommentEntity!]
+  created_at: DateTime!
+  email: String!
+  events: [EventEntity!]
+  geo: String
+  id: ID!
+  name: String!
+  password: String!
+  phone: String
+  places: [PlaceEntity!]
+  rating: [RatingEntity!]
+  role: RoleEntity!
+  roleId: Int!
+  shorts: [ShortEntity!]
+  statistics: [StatisticEntity!]
+  updated_at: DateTime!
+  visitors: [VisitorEntity!]
+}
+
+type VisitorEntity {
+  date: DateTime!
+  event: EventEntity!
+  eventId: Int!
+  id: Int!
+  user: UserEntity!
+  userId: Int!
+}
+
+type WidgetBodyEntity {
+  event: EventEntity!
+  eventId: Int
+  id: Int!
+  place: PlaceEntity!
+  placeId: Int
+  widget: WidgetEntity!
+  widgetId: Int!
+}
+
+type WidgetEntity {
+  active: Boolean!
+  body: [WidgetBodyEntity!]
+  id: Int!
+  sort: Int!
+  title: String
+  type: Widgets!
+}
+
+type WidgetResponse {
+  active: Boolean!
+  body: [Body!]!
+  id: Int!
+  sort: Int!
+  title: String
+  type: Widgets!
+}
+
+"""Описание виджетов"""
+enum Widgets {
+  """отдельная большая карточка места или события клиента"""
+  Client
+
+  """создать свое событие"""
+  Create_event
+
+  """создать свое место"""
+  Create_place
+
+  """динамические подборки"""
+  Dynamic_collections
+
+  """не знаешь куда пойти"""
+  Go
+
+  """карта"""
+  Map
+
+  """статические подборки"""
+  Static_collections
+}
